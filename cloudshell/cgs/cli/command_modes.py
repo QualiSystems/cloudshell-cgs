@@ -1,7 +1,7 @@
 from cloudshell.cli.service.command_mode import CommandMode
 
 # new line or begin of the line that doesn't saved in match
-BEGIN_LINE_PATTERN = r'((?<=\n)|(?<=^))'
+BEGIN_LINE_PATTERN = r"((?<=\n)|^)"
 
 
 class EnableCommandMode(CommandMode):
@@ -13,8 +13,7 @@ class EnableCommandMode(CommandMode):
     ENTER_COMMAND = ''
     EXIT_COMMAND = 'exit'
 
-    def __init__(self, resource_config):
-        self.resource_config = resource_config
+    def __init__(self):
         super().__init__(
             self.PROMPT,
             self.ENTER_COMMAND,
@@ -27,8 +26,7 @@ class ConfigCommandMode(CommandMode):
     ENTER_COMMAND = 'config'
     EXIT_COMMAND = 'exit'
 
-    def __init__(self, resource_config):
-        self.resource_config = resource_config
+    def __init__(self):
         super().__init__(
             self.PROMPT,
             self.ENTER_COMMAND,
