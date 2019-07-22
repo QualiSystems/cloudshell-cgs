@@ -6,36 +6,24 @@ BEGIN_LINE_PATTERN = r"((?<=\n)|^)"
 
 class EnableCommandMode(CommandMode):
     PROMPT = (
-        rf'{BEGIN_LINE_PATTERN}'
-        r'((?!\(config.*?\))(\w|-|\(|\)))*'  # \w or - or () and without (config.*) 
-        r'#\s*$'
+        rf"{BEGIN_LINE_PATTERN}"
+        r"((?!\(config.*?\))(\w|-|\(|\)))*"  # \w or - or () and without (config.*)
+        r"#\s*$"
     )
-    ENTER_COMMAND = ''
-    EXIT_COMMAND = 'exit'
+    ENTER_COMMAND = ""
+    EXIT_COMMAND = "exit"
 
     def __init__(self):
-        super().__init__(
-            self.PROMPT,
-            self.ENTER_COMMAND,
-            self.EXIT_COMMAND,
-        )
+        super().__init__(self.PROMPT, self.ENTER_COMMAND, self.EXIT_COMMAND)
 
 
 class ConfigCommandMode(CommandMode):
-    PROMPT = rf'{BEGIN_LINE_PATTERN}\S+\(config\)#\s*$'
-    ENTER_COMMAND = 'config'
-    EXIT_COMMAND = 'exit'
+    PROMPT = rf"{BEGIN_LINE_PATTERN}\S+\(config\)#\s*$"
+    ENTER_COMMAND = "config"
+    EXIT_COMMAND = "exit"
 
     def __init__(self):
-        super().__init__(
-            self.PROMPT,
-            self.ENTER_COMMAND,
-            self.EXIT_COMMAND,
-        )
+        super().__init__(self.PROMPT, self.ENTER_COMMAND, self.EXIT_COMMAND)
 
 
-CommandMode.RELATIONS_DICT = {
-    EnableCommandMode: {
-        ConfigCommandMode: {}
-    }
-}
+CommandMode.RELATIONS_DICT = {EnableCommandMode: {ConfigCommandMode: {}}}

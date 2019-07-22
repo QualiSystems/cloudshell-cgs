@@ -1,13 +1,14 @@
 import typing
 from dataclasses import dataclass
 
-from cloudshell.cli.command_template.command_template_executor import \
-    CommandTemplateExecutor
+from cloudshell.cli.command_template.command_template_executor import (
+    CommandTemplateExecutor,
+)
 from cloudshell.cli.configurator import AbstractModeConfigurator
 from cloudshell.cli.service.cli_service_impl import CliServiceImpl
 from cloudshell.cli.service.command_mode_helper import CommandModeHelper
 
-from cloudshell.cgs.cli.command_modes import EnableCommandMode, ConfigCommandMode
+from cloudshell.cgs.cli.command_modes import ConfigCommandMode, EnableCommandMode
 from cloudshell.cgs.command_templates.configuration import DISABLE_PAGINATION
 
 if typing.TYPE_CHECKING:
@@ -25,7 +26,7 @@ class CliConfig:
 
 
 class CgsCliConfigurator(AbstractModeConfigurator):
-    def __init__(self, cli: 'CLI', cli_config: CliConfig, logger: 'Logger'):
+    def __init__(self, cli_config: CliConfig, logger: "Logger", cli: "CLI" = None):
         super().__init__(cli_config, logger, cli)
         self.modes = CommandModeHelper.create_command_mode()
 
