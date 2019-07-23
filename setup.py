@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     install_requires=required,
     tests_require=required_for_tests,
-    python_requires="~=2.7",
+    python_requires=">=3.7",
     version=version_from_file,
     package_data={"": ["*.txt"]},
     description="Package for the CGS Shells",
