@@ -3,7 +3,7 @@ from unittest import TestCase
 from unittest.mock import create_autospec
 
 from cloudshell.cgs.cli.cli_configurator import CgsCliConfigurator, CliConfig
-from cloudshell.cgs.cli.command_modes import EnableCommandMode, ConfigCommandMode
+from cloudshell.cgs.cli.command_modes import ConfigCommandMode, EnableCommandMode
 
 
 class TestCliConfigurator(TestCase):
