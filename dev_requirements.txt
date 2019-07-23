@@ -2,4 +2,7 @@ pre-commit
 tox
 tox-factor
 -r test_requirements.txt
---extra-index-url https://test.pypi.org/simple -r requirements.txt
+-e git+git://github.com/QualiSystems/cloudshell-cli@refactoring_py3#egg=cloudshell-cli
+-e git+git://github.com/QualiSystems/cloudshell-logging@dev#egg=cloudshell-logging
+-e git+git://github.com/QualiSystems/cloudshell-shell-core@refactoring_py_3#egg=cloudshell-shell-core
+-e git+git://github.com/QualiSystems/cloudshell-shell-flows@dev#egg=cloudshell-shell-flows
