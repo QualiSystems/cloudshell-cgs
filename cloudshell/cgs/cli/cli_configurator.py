@@ -9,7 +9,7 @@ from cloudshell.cli.service.cli_service_impl import CliServiceImpl
 from cloudshell.cli.service.command_mode_helper import CommandModeHelper
 
 from cloudshell.cgs.cli.command_modes import ConfigCommandMode, EnableCommandMode
-from cloudshell.cgs.command_templates.configuration import DISABLE_PAGINATION
+from cloudshell.cgs.command_templates.configuration_commands import DISABLE_PAGINATION
 
 if typing.TYPE_CHECKING:
     from cloudshell.cli.service.cli import CLI
