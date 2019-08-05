@@ -14,17 +14,17 @@ if TYPE_CHECKING:
 class BaseCgsActions:
     def __init__(
         self,
-        cli_service: "CliServiceImpl",
-        command_modes: Dict[Type["CommandMode"], CommandMode],
-        logger: "Logger",
+        cli_service,
+        command_modes,
+        logger,
     ):
         self._cli_service = cli_service
         self._command_modes = command_modes
         self._logger = logger
 
-    def execute_command(self, command_template: "CommandTemplate", **kwargs):
+    def execute_command(self, command_template: "CommandTemplate", remove_prompt=False, **kwargs):
         return CommandTemplateExecutor(
-            self._cli_service, command_template
+            cli_service=self._cli_service, command_template=command_template, remove_prompt=remove_prompt
         ).execute_command(**kwargs)
 
     def enter_command_mode(self, command_mode: Type["CommandMode"]):

@@ -32,14 +32,17 @@ class L1ConnectionsFlow:
             )
             src_connected_ports = l1_actions.get_port_connected_ports(src_port)
 
-            for dst_port in map(self.convert_port, dst_ports):
-                if dst_port not in src_connected_ports:
-                    l1_actions.connect_ports(src_port, dst_port)
+            # todo: we need to change mode here, not in each port, otherwise it will require to commit each time
+            with cli_service.enter_mode(self._cli_configurator.config_mode):
+                for dst_port in map(self.convert_port, dst_ports):
+                    if dst_port not in src_connected_ports:
+                        l1_actions.connect_ports(src_port, dst_port)
 
-            l1_actions.commit()
+                l1_actions.commit()
 
             src_connected_ports = l1_actions.get_port_connected_ports(src_port)
             not_connected_ports = set(dst_ports) - set(src_connected_ports)
+
             if not not_connected_ports:
                 raise PortsNotConnectedError(
                     f"Failed to connected some ports. "

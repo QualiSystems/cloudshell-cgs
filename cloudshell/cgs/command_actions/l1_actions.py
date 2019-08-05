@@ -115,7 +115,7 @@ class L1Actions(BaseCgsActions):
 
     def get_filters(self) -> Filters:
         with self.enter_command_mode(EnableCommandMode):
-            connections = self.execute_command(SHOW_CONNECTIONS)
+            connections = self.execute_command(SHOW_CONNECTIONS, remove_prompt=True)
 
         return Filters(self._logger, connections)
 

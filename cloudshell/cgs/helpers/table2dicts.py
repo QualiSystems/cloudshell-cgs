@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import _KT, Generator, Iterator, List, Tuple, _T_co, _VT_co
+from typing import Generator, Iterator, List, Tuple
 
 
 class ParseTableError(Exception):
@@ -11,13 +11,13 @@ class ParsedTableDict(Mapping):
         self.original_line = original_line
         self._storage = dict(*args, **kwargs)
 
-    def __len__(self) -> int:
+    def __len__(self):
         return len(self._storage)
 
-    def __iter__(self) -> Iterator[_T_co]:
+    def __iter__(self):
         return iter(self._storage)
 
-    def __getitem__(self, k: _KT) -> _VT_co:
+    def __getitem__(self, k):
         return self._storage[k]
 
 

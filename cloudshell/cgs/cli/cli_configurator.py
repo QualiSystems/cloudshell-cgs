@@ -9,7 +9,7 @@ from cloudshell.cli.service.cli_service_impl import CliServiceImpl
 from cloudshell.cli.service.command_mode_helper import CommandModeHelper
 
 from cloudshell.cgs.cli.command_modes import ConfigCommandMode, EnableCommandMode
-from cloudshell.cgs.command_templates.configuration_commands import DISABLE_PAGINATION
+from cloudshell.cgs.command_templates.configuration_commands import DISABLE_PAGINATION, COMMIT
 
 if typing.TYPE_CHECKING:
     from cloudshell.cli.service.cli import CLI
@@ -41,3 +41,5 @@ class CgsCliConfigurator(AbstractModeConfigurator):
     def _on_session_start(self, session, logger):
         cli_service = CliServiceImpl(session, self.config_mode, logger)
         CommandTemplateExecutor(cli_service, DISABLE_PAGINATION).execute_command()
+        CommandTemplateExecutor(cli_service, COMMIT).execute_command()
+
