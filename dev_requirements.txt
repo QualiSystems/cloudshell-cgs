@@ -6,3 +6,5 @@ tox-factor
 -e git+git://github.com/QualiSystems/cloudshell-logging@dev#egg=cloudshell-logging
 -e git+git://github.com/QualiSystems/cloudshell-shell-core@refactoring_py_3#egg=cloudshell-shell-core
 -e git+git://github.com/QualiSystems/cloudshell-shell-flows@dev#egg=cloudshell-shell-flows
+-e git+git://github.com/QualiSystems/cloudshell-shell-standards@dev#egg=cloudshell-shell-standards
+-e git+git://github.com/QualiSystems/cloudshell-shell-networking-standard@dev#egg=cloudshell-shell-networking-standard
