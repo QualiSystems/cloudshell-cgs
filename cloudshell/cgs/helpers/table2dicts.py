@@ -1,13 +1,18 @@
-from collections.abc import Mapping
-from typing import Generator, Iterator, List, Tuple
+from collections import Mapping
 
 
 class ParseTableError(Exception):
-    """Parse table base error."""
+    """Parse table base error"""
 
 
 class ParsedTableDict(Mapping):
-    def __init__(self, *args, original_line: str, **kwargs):
+    def __init__(self, *args, original_line, **kwargs):
+        """
+
+        :param list args:
+        :param original_line:
+        :param dict kwargs:
+        """
         self.original_line = original_line
         self._storage = dict(*args, **kwargs)
 
@@ -21,9 +26,14 @@ class ParsedTableDict(Mapping):
         return self._storage[k]
 
 
-def table2dicts(
-    name_line: str, separator_line: str, data_lines: List[str]
-) -> Generator[ParsedTableDict, None, None]:
+def table2dicts(name_line, separator_line, data_lines):
+    """
+
+    :param str name_line:
+    :param str separator_line:
+    :param list[str] data_lines:
+    :rtype: collections.Iterable
+    """
     col_width = tuple(_get_col_width(separator_line))
     names = tuple(map(str.strip, _get_columns(name_line, col_width)))
 
@@ -32,7 +42,12 @@ def table2dicts(
         yield ParsedTableDict(zip(names, columns), original_line=line)
 
 
-def _get_col_width(line: str) -> Iterator[int]:
+def _get_col_width(line):
+    """
+
+    :param str line:
+    :rtype: collections.Iterable
+    """
     line_symbols = set(line)
     separator_set = line_symbols - {" "}
     if len(separator_set) != 1:
@@ -42,7 +57,13 @@ def _get_col_width(line: str) -> Iterator[int]:
     return map(lambda s: s.count(separator), line.split())
 
 
-def _get_columns(line: str, col_width: Tuple[int, ...]) -> Generator[str, None, None]:
+def _get_columns(line, col_width):
+    """
+
+    :param str line:
+    :param tuple[int] col_width:
+    :rtype: collections.Iterable
+    """
     current_pos = 0
     for width in col_width:
         end = current_pos + width

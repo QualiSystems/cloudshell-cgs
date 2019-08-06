@@ -1,16 +1,14 @@
-import typing
-
 from cloudshell.cgs.cli.cli_configurator import CliConfig
-
-if typing.TYPE_CHECKING:
-    from cloudshell.shell.standards.resource_config_generic_models import (
-        GenericCLIConfig,
-    )
 
 
 class CliConfigResourceConfig(CliConfig):
     @classmethod
-    def from_resource_config(cls, resource_config: "GenericCLIConfig"):
+    def from_resource_config(cls, resource_config):
+        """
+
+        :param cloudshell.shell.standards.resource_config_generic_models.GenericCLIConfig resource_config:
+        :rtype: CliConfigResourceConfig
+        """
         return cls(
             resource_config.user,
             resource_config.password,

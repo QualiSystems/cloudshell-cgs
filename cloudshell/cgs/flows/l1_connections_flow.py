@@ -1,29 +1,34 @@
-from typing import TYPE_CHECKING, List
-
 from cloudshell.cgs.command_actions.l1_actions import L1Actions
 from cloudshell.cgs.helpers.errors import PortsNotConnectedError, PortsNotDeletedError
 
-if TYPE_CHECKING:
-    from logging import Logger
-    from cloudshell.cgs.cli.cli_configurator import CgsCliConfigurator
 
+class L1ConnectionsFlow(object):
+    def __init__(self, cli_configurator, logger):
+        """
 
-class L1ConnectionsFlow:
-    def __init__(self, cli_configurator: "CgsCliConfigurator", logger: "Logger"):
+        :param cloudshell.cgs.cli.cli_configurator.CgsCliConfigurator cli_configurator:
+        :param logging.Logger logger:
+        """
         self._cli_configurator = cli_configurator
         self._logger = logger
 
     @staticmethod
-    def convert_port(quali_port: str):
+    def convert_port(quali_port):
         """Convert ports from CloudShell view to CGS.
 
         CloudShell save SubPorts as 49-1, but CGS as 49/1
-        :param quali_port: 192.168.122.2/1/48 or 192.168.122.2/1/49-2
+        :param str quali_port: 192.168.122.2/1/48 or 192.168.122.2/1/49-2
         """
         _, port_name = quali_port.rsplit("/", 1)
         return port_name.replace("-", "/")
 
-    def map_uni(self, src_port: str, dst_ports: List[str]):
+    def map_uni(self, src_port, dst_ports):
+        """
+
+        :param str src_port:
+        :param list[str] dst_ports:
+        :return:
+        """
         src_port = self.convert_port(src_port)
 
         with self._cli_configurator.enable_mode_service() as cli_service:
@@ -45,11 +50,17 @@ class L1ConnectionsFlow:
 
             if not not_connected_ports:
                 raise PortsNotConnectedError(
-                    f"Failed to connected some ports. "
-                    f"src ports - {src_port} and dst ports - {not_connected_ports}"
+                    "Failed to connected some ports. "
+                    "src ports - {} and dst ports - {}".format(src_port, not_connected_ports)
                 )
 
-    def map_bidi(self, src_port: str, dst_port: str):
+    def map_bidi(self, src_port, dst_port):
+        """
+
+        :param str src_port:
+        :param str dst_port:
+        :return:
+        """
         src_port = self.convert_port(src_port)
         dst_port = self.convert_port(dst_port)
 
@@ -74,10 +85,15 @@ class L1ConnectionsFlow:
                 or dst_port not in src_connected_ports
             ):
                 raise PortsNotConnectedError(
-                    f"Failed to create bidi connection between {src_port} - {dst_port}"
+                    "Failed to create bidi connection between {} - {}".format(src_port, dst_port)
                 )
 
-    def map_clear(self, ports: List[str]):
+    def map_clear(self, ports):
+        """
+
+        :param list[str] ports:
+        :return:
+        """
         with self._cli_configurator.enable_mode_service() as cli_service:
             l1_actions = L1Actions(
                 cli_service, self._cli_configurator.modes, self._logger
@@ -89,10 +105,16 @@ class L1ConnectionsFlow:
             not_deleted_filter_ids = l1_actions.get_filter_ids_with_ports_in_it(ports)
             if not_deleted_filter_ids:
                 raise PortsNotDeletedError(
-                    f"Problem with deleting filters {','.join(not_deleted_filter_ids)}"
+                    "Problem with deleting filters {}".format(','.join(not_deleted_filter_ids))
                 )
 
-    def map_clear_to(self, src_port: str, dst_ports: List[str]):
+    def map_clear_to(self, src_port, dst_ports):
+        """
+
+        :param str src_port:
+        :param list[str] dst_ports:
+        :return:
+        """
         with self._cli_configurator.enable_mode_service() as cli_service:
             l1_actions = L1Actions(
                 cli_service, self._cli_configurator.modes, self._logger
@@ -108,5 +130,5 @@ class L1ConnectionsFlow:
             )
             if not_deleted_filter_ids:
                 raise PortsNotDeletedError(
-                    f"Problem with deleting filters {','.join(not_deleted_filter_ids)}"
+                    "Problem with deleting filters {}".format(','.join(not_deleted_filter_ids))
                 )

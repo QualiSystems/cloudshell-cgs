@@ -1,22 +1,17 @@
-import typing
-
 from cloudshell.cgs.cli.cli_configurator import CliConfig
-
-if typing.TYPE_CHECKING:
-    from cloudshell.layer_one.core.helper.runtime_configuration import (
-        RuntimeConfiguration,
-    )
 
 
 class CliConfigForL1(CliConfig):
     @classmethod
-    def from_runtime_config(
-        cls,
-        runtime_config: "RuntimeConfiguration",
-        user: str,
-        password: str,
-        resource_address: str,
-    ):
+    def from_runtime_config(cls, runtime_config, user, password, resource_address):
+        """
+
+        :param cloudshell.layer_one.core.helper.runtime_configuration.RuntimeConfiguration runtime_config:
+        :param str user:
+        :param str password:
+        :param str resource_address:
+        :rtype: CliConfigForL1
+        """
         return cls(
             user,
             password,
