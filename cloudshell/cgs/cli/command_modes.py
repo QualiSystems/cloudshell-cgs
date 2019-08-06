@@ -1,4 +1,4 @@
-from cloudshell.cli.service.command_mode import CommandMode
+from cloudshell.cli.command_mode import CommandMode
 
 # new line or begin of the line that doesn't saved in match
 BEGIN_LINE_PATTERN = r"((?<=\n)|^)"

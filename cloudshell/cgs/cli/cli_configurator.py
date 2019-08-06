@@ -1,7 +1,7 @@
 from cloudshell.cli.command_template.command_template_executor import CommandTemplateExecutor
 from cloudshell.cli.configurator import AbstractModeConfigurator
-from cloudshell.cli.service.cli_service_impl import CliServiceImpl
-from cloudshell.cli.service.command_mode_helper import CommandModeHelper
+from cloudshell.cli.cli_service_impl import CliServiceImpl
+from cloudshell.cli.command_mode_helper import CommandModeHelper
 
 from cloudshell.cgs.cli.command_modes import ConfigCommandMode, EnableCommandMode
 from cloudshell.cgs.command_templates.configuration_commands import (

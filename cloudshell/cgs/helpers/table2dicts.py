@@ -6,7 +6,7 @@ class ParseTableError(Exception):
 
 
 class ParsedTableDict(Mapping):
-    def __init__(self, *args, original_line, **kwargs):
+    def __init__(self, original_line="", **kwargs):
         """
 
         :param list args:
@@ -14,7 +14,7 @@ class ParsedTableDict(Mapping):
         :param dict kwargs:
         """
         self.original_line = original_line
-        self._storage = dict(*args, **kwargs)
+        self._storage = dict(**kwargs)
 
     def __len__(self):
         return len(self._storage)

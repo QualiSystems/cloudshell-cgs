@@ -111,8 +111,9 @@ class Filters(object):
         lines = table.splitlines()
         try:
             dicts = table2dicts(lines[0], lines[1], lines[2:])
-        except ParseTableError as e:
-            raise ParseFilterError("Could not parse filters") from e
+        except ParseTableError:
+            self._logger.exception("Unable to parse filters: ")
+            raise ParseFilterError("Could not parse filters")
 
         self.filters_list = []
         for dict_ in dicts:
