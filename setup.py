@@ -22,6 +22,6 @@ setup(
     python_requires="~=2.7",
     version=version_from_file,
     package_data={"": ["*.txt"]},
-    description="<your package description>",
+    description="CloudShell CGS package",
     include_package_data=True,
 )
