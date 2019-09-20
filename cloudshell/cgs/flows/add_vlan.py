@@ -10,7 +10,7 @@ from cloudshell.cgs.command_actions.vlan import VlanActions
 class CgsAddVlanFlow(AddVlanFlow):
     @staticmethod
     def _get_port_name(full_port_name):
-        """
+        """Parse CGS port name from the CS full port name.
 
         :param full_port_name:
         :return:
@@ -18,7 +18,7 @@ class CgsAddVlanFlow(AddVlanFlow):
         return re.sub("[^0-9]", "", full_port_name.split("/")[-1])
 
     def execute_flow(self, vlan_range, port_mode, port_name, qnq, c_tag):
-        """
+        """Execute Add VLAN flow.
 
         :param vlan_range:
         :param port_mode:

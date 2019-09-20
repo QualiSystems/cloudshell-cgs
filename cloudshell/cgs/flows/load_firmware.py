@@ -16,7 +16,7 @@ class CgsLoadFirmwareFlow(LoadFirmwareFlow):
 
     @staticmethod
     def _convert_boot_bank(boot_bank):
-        """
+        """Convert Boot bank name.
 
         :param boot_bank:
         :return:
@@ -25,7 +25,7 @@ class CgsLoadFirmwareFlow(LoadFirmwareFlow):
 
     @staticmethod
     def _get_firmware_file_name(path):
-        """
+        """Parse firmware file name.
 
         :param path:
         :return:
@@ -33,7 +33,7 @@ class CgsLoadFirmwareFlow(LoadFirmwareFlow):
         return path.split("/")[-1]
 
     def execute_flow(self, path, vrf, timeout):
-        """
+        """Execute load firmware flow.
 
         :param path:
         :param vrf:
@@ -94,7 +94,7 @@ class CgsLoadFirmwareFlow(LoadFirmwareFlow):
             config_session.reconnect(timeout)
 
     def _wait_for_image_validation(self, firmware_actions, file_name):
-        """
+        """Wait for the firmware image validation.
 
         :param firmware_actions:
         :param file_name:

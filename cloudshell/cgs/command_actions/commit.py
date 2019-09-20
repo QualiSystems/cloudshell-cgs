@@ -10,7 +10,7 @@ class CommitActions(object):
     ABORT_COMMAND_TIMEOUT = 5 * 60
 
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
 
         :param cli_service:
         :param logger:
@@ -19,7 +19,8 @@ class CommitActions(object):
         self._logger = logger
 
     def commit(self, action_map=None, error_map=None):
-        """
+        """Commit pending changes.
+
         :param action_map:
         :param error_map:
         :return:
@@ -33,7 +34,7 @@ class CommitActions(object):
         ).execute_command()
 
     def abort(self, action_map=None, error_map=None):
-        """
+        """Abort pending changes.
 
         :param action_map:
         :param error_map:

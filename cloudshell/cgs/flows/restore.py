@@ -8,14 +8,6 @@ class CgsRestoreFlow(RestoreConfigurationFlow):
     def execute_flow(
         self, path, configuration_type, restore_method, vrf_management_name=None
     ):
-        """
-
-        :param path:
-        :param configuration_type:
-        :param restore_method:
-        :param vrf_management_name:
-        :return:
-        """
         url = UrlParser.parse_url(path)
         config_file = url.get(UrlParser.FILENAME)
 

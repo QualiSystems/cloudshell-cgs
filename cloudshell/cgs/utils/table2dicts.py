@@ -4,12 +4,12 @@ from cloudshell.cgs.errors import ParseFilterError, UnsupportedPortsInFilterErro
 
 
 class ParseTableError(Exception):
-    """Parse table base error"""
+    """Parse table base error."""
 
 
 class ParsedTableDict(Mapping):
     def __init__(self, *args, **kwargs):
-        """
+        """Init command.
 
         :param list args:
         :param original_line:
@@ -29,13 +29,13 @@ class ParsedTableDict(Mapping):
 
 
 class ConsoleTable(object):
-    """Will transform console output table into list of models"""
+    """Will transform console output table into list of models."""
 
     class Model(object):
-        """Model that represents row data"""
+        """Model that represents row data."""
 
         def __init__(self, **kwargs):
-            """
+            """Init command.
 
             :param dict kwargs:
             """
@@ -45,7 +45,7 @@ class ConsoleTable(object):
 
         @classmethod
         def from_dict(cls, data):
-            """
+            """Create instance from dictionary.
 
             :param dict data:
             :return:
@@ -55,14 +55,14 @@ class ConsoleTable(object):
             )
 
         def validate(self):
-            """
+            """Validate model.
 
             :return:
             """
             pass
 
     def __init__(self, logger, table=None):
-        """
+        """Init command.
 
         :param logging.Logger logger:
         :param str table:
@@ -77,7 +77,7 @@ class ConsoleTable(object):
         return iter(self.rows)
 
     def update_ports_from_table(self, table):
-        """Update ports from show filters output
+        """Update ports from show filters output.
 
         :param str table:
         :return:
@@ -109,7 +109,7 @@ class ConsoleTable(object):
 
 
 def table2dicts(name_line, separator_line, data_lines):
-    """
+    """Convert tables data lines.
 
     :param str name_line:
     :param str separator_line:
@@ -125,7 +125,7 @@ def table2dicts(name_line, separator_line, data_lines):
 
 
 def _get_col_width(line):
-    """
+    """Get columns width.
 
     :param str line:
     :rtype: collections.Iterable
@@ -140,7 +140,7 @@ def _get_col_width(line):
 
 
 def _get_columns(line, col_width):
-    """
+    """Get columns.
 
     :param str line:
     :param tuple[int] col_width:

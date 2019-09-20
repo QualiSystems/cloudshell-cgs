@@ -13,9 +13,9 @@ class SnmpIfTable(object):
         self._snmp = snmp_handler
         self._logger = logger
         self._load_snmp_tables()
-        self._if_entities_dict = dict()
-        self._if_port_dict = dict()
-        self._if_port_channels_dict = dict()
+        self._if_entities_dict = {}
+        self._if_port_dict = {}
+        self._if_port_channels_dict = {}
         self.port_attributes_snmp_tables = SnmpPortAttrTables(snmp_handler, logger)
 
     @property
@@ -47,11 +47,11 @@ class SnmpIfTable(object):
             if "." in interface_name:
                 continue
             if any(
-                [
+                (
                     port_channel
                     for port_channel in self.PORT_CHANNEL_NAME
                     if port_channel in interface_name.lower()
-                ]
+                )
             ):
 
                 port_channel_obj = SnmpIfPortChannelEntity(
@@ -64,11 +64,11 @@ class SnmpIfTable(object):
                 self._if_entities_dict[index] = port_channel_obj
                 self._if_port_channels_dict[index] = port_channel_obj
             elif any(
-                [
+                (
                     exclude_port
                     for exclude_port in self.PORT_EXCLUDE_LIST
                     if exclude_port in interface_name.lower()
-                ]
+                )
             ):
                 continue
             else:
@@ -83,11 +83,7 @@ class SnmpIfTable(object):
                 self._if_port_dict[index] = port_obj
 
     def _load_snmp_tables(self):
-        """ Load all cisco required snmp tables
-
-        :return:
-        """
-
+        """Load all cisco required snmp tables."""
         self._logger.info("Start loading MIB tables:")
         self._if_table = self._snmp.get_table("IF-MIB", "ifDescr")
         self._logger.info("ifIndex table loaded")
@@ -95,7 +91,7 @@ class SnmpIfTable(object):
         self._logger.info("MIB Tables loaded successfully")
 
     def get_if_index_from_port_name(self, port_name, port_filter_list):
-        port_if_re = re.findall("\d+", port_name)
+        port_if_re = re.findall("\d+", port_name)  # noqa
         if port_if_re:
             if_table_re = "/".join(port_if_re)
             for interface in self.if_ports:

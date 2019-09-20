@@ -42,11 +42,10 @@ class SnmpIfEntity(object):
         return self._ipv6
 
     def _get_ipv4(self):
-        """Get IPv4 address details for provided port
+        """Get IPv4 address details for provided port.
 
         :return str IPv4 Address
         """
-
         if self._port_attributes_snmp_tables.ip_v4_table:
             for key, value in self._port_attributes_snmp_tables.ip_v4_table.iteritems():
                 if (
@@ -56,11 +55,10 @@ class SnmpIfEntity(object):
                     return key
 
     def _get_ipv6(self):
-        """Get IPv6 address details for provided port
+        """Get IPv6 address details for provided port.
 
         :return str IPv6 Address
         """
-
         if self._port_attributes_snmp_tables.ip_v6_table:
             for key, value in self._port_attributes_snmp_tables.ip_v6_table.iteritems():
                 if (

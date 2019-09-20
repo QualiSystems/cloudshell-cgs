@@ -81,18 +81,14 @@ class SnmpIfPortEntity(SnmpIfEntity):
     @property
     def auto_negotiation(self):
         return None
-        # todo: get correct attribute value
-        # if not self._auto_neg:
-        #     self._auto_neg = self._get_auto_neg() or "False"
-        # return self._auto_neg
 
     def _get_adjacent(self):
-        """Get connected device interface and device name to the specified port id, using cdp or lldp protocols
+        """Get connected device interface and device name.
 
+        It uses cdp or lldp protocols
         :return: device's name and port connected to port id
         :rtype string
         """
-
         result_template = "{remote_host} through {remote_port}"
         result = ""
         for key, value in self._port_attributes_snmp_tables.cdp_table.iteritems():
@@ -131,11 +127,10 @@ class SnmpIfPortEntity(SnmpIfEntity):
         return result
 
     def _get_auto_neg(self):
-        """Get port auto negotiation status
+        """Get port auto negotiation status.
 
         :return return "True"
         """
-
         cisco_duplex = self._get_cisco_duplex()
         if cisco_duplex:
             if cisco_duplex in ["auto", "disagree"]:
@@ -155,9 +150,8 @@ class SnmpIfPortEntity(SnmpIfEntity):
 
     def _get_cisco_duplex(self):
         if not self._cisco_duplex:
-            cisco_duplex_id = self._port_attributes_snmp_tables.cisco_duplex_state_table.get(
-                str(self.if_index)
-            )
+            table = self._port_attributes_snmp_tables.cisco_duplex_state_table
+            cisco_duplex_id = table.get(str(self.if_index))
             if cisco_duplex_id:
                 self._cisco_duplex = self._snmp.get_property(
                     "CISCO-STACK-MIB", "portDuplex", cisco_duplex_id
@@ -165,11 +159,10 @@ class SnmpIfPortEntity(SnmpIfEntity):
         return self._cisco_duplex
 
     def _get_duplex(self):
-        """Get current duplex state
+        """Get current duplex state.
 
         :return str "Full"
         """
-
         cisco_duplex = self._get_cisco_duplex()
         if cisco_duplex:
             if cisco_duplex in ["full", "half"]:

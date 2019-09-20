@@ -26,12 +26,10 @@ class SnmpPortAttrTables(object):
         if self._lldp_local_table is None:
             lldp_local_table = self._snmp.get_table("LLDP-MIB", "lldpLocPortDesc")
             if lldp_local_table:
-                self._lldp_local_table = dict(
-                    [
-                        (v["lldpLocPortDesc"].lower(), k)
-                        for k, v in lldp_local_table.iteritems()
-                    ]
-                )
+                self._lldp_local_table = {
+                    v["lldpLocPortDesc"].lower(): k
+                    for k, v in lldp_local_table.iteritems()
+                }
             else:
                 self._lldp_local_table = defaultdict()
             self._logger.info("lldpLocPortDesc table loaded")
@@ -54,17 +52,15 @@ class SnmpPortAttrTables(object):
     @property
     def cisco_duplex_state_table(self):
         if self._cisco_duplex_state_table is None:
-            self._cisco_duplex_state_table = dict()
+            self._cisco_duplex_state_table = {}
             cisco_duplex_state_table = self._snmp.get_table(
                 "CISCO-STACK-MIB", "portIfIndex"
             )
             if cisco_duplex_state_table:
-                self._cisco_duplex_state_table = dict(
-                    [
-                        (v.get("portIfIndex", "").lower(), k)
-                        for k, v in cisco_duplex_state_table.iteritems()
-                    ]
-                )
+                self._cisco_duplex_state_table = {
+                    v.get("portIfIndex", "").lower(): k
+                    for k, v in cisco_duplex_state_table.iteritems()
+                }
             self._logger.info("Duplex portIfIndex table loaded")
         return self._cisco_duplex_state_table
 

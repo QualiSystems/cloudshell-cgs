@@ -6,6 +6,8 @@ from cloudshell.cgs.utils.table2dicts import ConsoleTable
 
 class Filters(ConsoleTable):
     class Model(ConsoleTable.Model):
+        """Model that represents table row."""
+
         ADMIN_ENABLED = "enabled"
         ACTION_REDIRECT = "redirect"
         PORT_PATTERN = re.compile(r"^\d+(/\d+)?|all$")
@@ -21,7 +23,7 @@ class Filters(ConsoleTable):
             classifiers,
             packet_processing,
         ):
-            """
+            """Init command.
 
             :param str filter_id:
             :param str admin:
@@ -41,7 +43,7 @@ class Filters(ConsoleTable):
 
         @classmethod
         def from_dict(cls, data):
-            """
+            """Create instance from dict.
 
             :param dict data:
             :return:
@@ -59,7 +61,7 @@ class Filters(ConsoleTable):
 
         @property
         def is_enabled(self):
-            """
+            """Check if enabled.
 
             :rtype: bool
             """
@@ -67,14 +69,14 @@ class Filters(ConsoleTable):
 
         @property
         def is_redirect(self):
-            """
+            """Check if redirect.
 
             :rtype: bool
             """
             return self.action.lower() == self.ACTION_REDIRECT
 
         def validate(self):
-            """
+            """Validate filter data.
 
             :return:
             """
@@ -82,7 +84,7 @@ class Filters(ConsoleTable):
             self.validate_port(self.output_port)
 
         def validate_port(self, port):
-            """
+            """Validate port.
 
             :param str port:
             :return:
@@ -91,7 +93,7 @@ class Filters(ConsoleTable):
                 raise UnsupportedPortsInFilterError
 
     def find_filters_by_fields(self, **kwargs):
-        """
+        """Find filters by their fields data.
 
         :param kwargs:
         :return:
@@ -100,6 +102,6 @@ class Filters(ConsoleTable):
             filter_.filter_id
             for filter_ in self
             if all(
-                [getattr(filter_, key) == value for key, value in kwargs.iteritems()]
+                (getattr(filter_, key) == value for key, value in kwargs.iteritems())
             )
         ]

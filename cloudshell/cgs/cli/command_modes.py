@@ -11,7 +11,7 @@ class EnableCommandMode(CommandMode):
     EXIT_COMMAND = "exit"
 
     def __init__(self, resource_config, api):
-        """Initialize Enable command mode
+        """Initialize Enable command mode.
 
         :param resource_config:
         """
@@ -31,7 +31,7 @@ class ConfigCommandMode(CommandMode):
     EXIT_COMMAND = "exit"
 
     def __init__(self, resource_config, api):
-        """Initialize Config command mode
+        """Initialize Config command mode.
 
         :param resource_config:
         """
@@ -57,7 +57,7 @@ class SNMPv3UserConfigCommandMode(ConfigCommandMode):
     EXIT_COMMAND = "exit"
 
     def __init__(self, resource_config, api, username, parent_mode):
-        """Initialize Config command mode
+        """Initialize Config command mode.
 
         :param resource_config:
         """

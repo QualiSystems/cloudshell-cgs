@@ -8,7 +8,7 @@ from cloudshell.cgs.utils.filters import Filters
 
 class FiltersActions(object):
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
 
         :param cli_service: default mode cli_service
         :type cli_service: CliService
@@ -20,7 +20,7 @@ class FiltersActions(object):
         self._logger = logger
 
     def get_filters(self, action_map=None, error_map=None):
-        """
+        """Get all filters.
 
         :param action_map:
         :param error_map:
@@ -37,7 +37,7 @@ class FiltersActions(object):
         return Filters(self._logger, connections)
 
     def remove_filter(self, filter_id, action_map=None, error_map=None):
-        """
+        """Remove filter by ID.
 
         :param filter_id:
         :param action_map:
@@ -52,7 +52,7 @@ class FiltersActions(object):
         ).execute_command(filter_id=filter_id)
 
     def remove_filters(self, filter_ids, action_map=None, error_map=None):
-        """Remove filters
+        """Remove filters by IDs.
 
         It's important to delete all needed filters in one command.
         After deleting a filter next filters change their ids

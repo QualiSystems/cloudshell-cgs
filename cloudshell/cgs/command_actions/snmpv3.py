@@ -17,13 +17,13 @@ class SnmpV3Actions(object):
         SNMPV3Parameters.PRIV_NO_PRIV: "none",
         SNMPV3Parameters.PRIV_DES: "DES",
         SNMPV3Parameters.PRIV_AES128: "AES-128",
-        # SNMPV3Parameters.PRIV_3DES: "",  # not supported by device
-        # SNMPV3Parameters.PRIV_AES192: "",  # not supported by device
-        # SNMPV3Parameters.PRIV_AES256: ""   # not supported by device
+        # noqa SNMPV3Parameters.PRIV_3DES: "",  # not supported by device
+        # noqa SNMPV3Parameters.PRIV_AES192: "",  # not supported by device
+        # noqa SNMPV3Parameters.PRIV_AES256: ""   # not supported by device
     }
 
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
 
         :param cli_service:
         :param logger:
@@ -32,7 +32,7 @@ class SnmpV3Actions(object):
         self._logger = logger
 
     def enable_snmp(self, action_map=None, error_map=None):
-        """
+        """Enable SNMPv3 service.
 
         :param action_map:
         :param error_map:
@@ -54,7 +54,7 @@ class SnmpV3Actions(object):
         action_map=None,
         error_map=None,
     ):
-        """
+        """Add SNMPv3 user Auth and Priv.
 
         :param snmp_password:
         :param snmp_priv_key:
@@ -108,7 +108,7 @@ class SnmpV3Actions(object):
         return output
 
     def remove_snmp_user(self, snmp_user, action_map=None, error_map=None):
-        """
+        """Remove SNMPv3 user.
 
         :param snmp_user:
         :param action_map:
@@ -123,7 +123,7 @@ class SnmpV3Actions(object):
         ).execute_command(snmp_user=snmp_user)
 
     def disable_snmp(self, action_map=None, error_map=None):
-        """
+        """Disable SNMPv3 service.
 
         :param action_map:
         :param error_map:

@@ -9,7 +9,7 @@ from cloudshell.cgs.command_actions.snmpv3 import SnmpV3Actions
 
 class CgsDisableSnmpFlow(DisableSnmpFlow):
     def __init__(self, cli_handler, resource_config, logger):
-        """
+        """Init command.
 
         :param cli_handler:
         :param resource_config:
@@ -19,7 +19,7 @@ class CgsDisableSnmpFlow(DisableSnmpFlow):
         self._resource_config = resource_config
 
     def execute_flow(self, snmp_parameters):
-        """
+        """Execute disable SNMP flow.
 
         :param cloudshell.snmp.snmp_parameters.SNMPParameters snmp_parameters:
         :return: commands output
@@ -35,7 +35,7 @@ class CgsDisableSnmpFlow(DisableSnmpFlow):
             disable_snmp(cli_service=cli_service, snmp_parameters=snmp_parameters)
 
     def _disable_snmp_v2(self, cli_service, snmp_parameters):
-        """
+        """Execute disable SNMPv2 flow.
 
         :param cloudshell.cli.cli_service_impl.CliServiceImpl cli_service:
         :param cloudshell.snmp.snmp_parameters.SNMPParameters snmp_parameters:
@@ -71,7 +71,7 @@ class CgsDisableSnmpFlow(DisableSnmpFlow):
         return output
 
     def _disable_snmp_v3(self, cli_service, snmp_parameters):
-        """
+        """Execute disable SNMPv3 flow.
 
         :param cloudshell.cli.cli_service_impl.CliServiceImpl cli_service:
         :param cloudshell.snmp.snmp_parameters.SNMPParameters snmp_parameters:

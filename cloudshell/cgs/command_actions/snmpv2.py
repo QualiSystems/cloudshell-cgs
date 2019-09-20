@@ -7,7 +7,7 @@ from cloudshell.cgs.command_templates import snmpv2
 
 class SnmpV2Actions(object):
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
 
         :param cli_service:
         :param logger:
@@ -16,7 +16,7 @@ class SnmpV2Actions(object):
         self._logger = logger
 
     def enable_snmp(self, action_map=None, error_map=None):
-        """
+        """Enable SNMPv2 service.
 
         :param action_map:
         :param error_map:
@@ -30,7 +30,7 @@ class SnmpV2Actions(object):
         ).execute_command()
 
     def set_read_community(self, snmp_community, action_map=None, error_map=None):
-        """
+        """Set SNMPv2 read community.
 
         :param snmp_community:
         :param action_map:
@@ -45,7 +45,7 @@ class SnmpV2Actions(object):
         ).execute_command(snmp_community=snmp_community)
 
     def set_write_community(self, snmp_community, action_map=None, error_map=None):
-        """
+        """Set SNMPv2 write community.
 
         :param snmp_community:
         :param action_map:
@@ -60,7 +60,7 @@ class SnmpV2Actions(object):
         ).execute_command(snmp_community=snmp_community)
 
     def disable_snmp(self, action_map=None, error_map=None):
-        """
+        """Disable SNMPv2 service.
 
         :param action_map:
         :param error_map:
@@ -74,7 +74,7 @@ class SnmpV2Actions(object):
         ).execute_command()
 
     def unset_read_community(self, snmp_community, action_map=None, error_map=None):
-        """
+        """Unset SNMPv2 read community.
 
         :param snmp_community:
         :param action_map:
@@ -89,7 +89,7 @@ class SnmpV2Actions(object):
         ).execute_command(snmp_community=snmp_community)
 
     def unset_write_community(self, snmp_community, action_map=None, error_map=None):
-        """
+        """Set SNMPv2 write community.
 
         :param snmp_community:
         :param action_map:

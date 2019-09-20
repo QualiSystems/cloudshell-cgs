@@ -6,7 +6,7 @@ from cloudshell.cgs.command_actions.save_restore import SaveRestoreActions
 
 class CgsSaveFlow(SaveConfigurationFlow):
     def execute_flow(self, folder_path, configuration_type, vrf_management_name=None):
-        """
+        """Execute Save flow.
 
         :param folder_path:
         :param configuration_type:

@@ -5,7 +5,7 @@ from cloudshell.cgs.flows.autoload import CgsSnmpAutoloadFlow
 
 class CgsAutoloadRunner(AutoloadRunner):
     def __init__(self, logger, resource_config, snmp_handler):
-        """
+        """Init command.
 
         :param logger:
         :param resource_config:
@@ -18,8 +18,4 @@ class CgsAutoloadRunner(AutoloadRunner):
 
     @property
     def autoload_flow(self):
-        """
-
-        :return:
-        """
         return CgsSnmpAutoloadFlow(snmp_handler=self.snmp_handler, logger=self._logger)

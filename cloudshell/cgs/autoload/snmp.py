@@ -2,14 +2,18 @@ import os
 import re
 
 from cloudshell.devices.autoload.autoload_builder import AutoloadDetailsBuilder
-from cloudshell.devices.standards.networking.autoload_structure import *
+from cloudshell.devices.standards.networking.autoload_structure import (
+    GenericChassis,
+    GenericPort,
+    GenericResource,
+)
 
 from cloudshell.cgs.autoload.snmp_if_table import SnmpIfTable
 
 
 class CgsSNMPAutoload(object):
     def __init__(self, snmp_handler, shell_name, shell_type, resource_name, logger):
-        """
+        """Init command.
 
         :param snmp_handler:
         :param shell_name:
@@ -39,14 +43,15 @@ class CgsSNMPAutoload(object):
         self.resource.add_sub_resource("1", self.chassis)
 
     def _load_mibs(self):
-        """Load CGS specific MIBs inside SNMP handler"""
+        """Load CGS specific MIBs inside SNMP handler."""
         path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "mibs"))
         self.snmp_handler.update_mib_sources(path)
 
     def discover(self, supported_os):
-        """General entry point for autoload, read device structure and attributes:
+        """General entry point for autoload, read device structure and attributes.
 
-        chassis, modules, submodules, ports, port-channels and power supplies
+        Attributes: chassis, modules, submodules, ports,
+        port-channels and power supplies
         :return: AutoLoadDetails object
         """
         self.logger.info("*" * 70)
@@ -62,7 +67,7 @@ class CgsSNMPAutoload(object):
         return autoload_details
 
     def _log_autoload_details(self, autoload_details):
-        """Logging autoload details
+        """Logging autoload details.
 
         :param autoload_details:
         :return:
@@ -88,7 +93,8 @@ class CgsSNMPAutoload(object):
         self.logger.debug("-------------------- </ATTRIBUTES> ---------------------")
 
     def _get_device_model(self):
-        """Get device model from the SNMPv2 mib
+        """Get device model from the SNMPv2 mib.
+
         :return: device model
         :rtype: str
         """
@@ -103,8 +109,7 @@ class CgsSNMPAutoload(object):
         return result
 
     def _get_device_details(self):
-        """Get root element attributes """
-
+        """Get root element attributes."""
         self.logger.info("Building Root")
         vendor = "CGS"
 
@@ -121,7 +126,7 @@ class CgsSNMPAutoload(object):
         self.resource.vendor = vendor
 
     def _load_snmp_tables(self):
-        """Load all Cisco required snmp tables
+        """Load all Cisco required snmp tables.
 
         :return:
         """
@@ -130,7 +135,7 @@ class CgsSNMPAutoload(object):
         self.logger.info("fTable MIB loaded")
 
     def _build_ports(self):
-        """Get resource details and attributes for every port in self.port_list
+        """Get resource details and attributes for every port in self.port_list.
 
         :return:
         """

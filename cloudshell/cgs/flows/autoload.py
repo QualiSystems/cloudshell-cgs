@@ -5,7 +5,7 @@ from cloudshell.cgs.autoload.snmp import CgsSNMPAutoload
 
 class CgsSnmpAutoloadFlow(AutoloadFlow):
     def execute_flow(self, supported_os, shell_name, shell_type, resource_name):
-        """
+        """Execute Autoload flow.
 
         :param supported_os:
         :param shell_name:

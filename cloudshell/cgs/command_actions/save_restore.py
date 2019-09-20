@@ -7,7 +7,7 @@ from cloudshell.cgs.command_templates import save_restore
 
 class SaveRestoreActions(object):
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
 
         :param cli_service:
         :param logger:
@@ -16,7 +16,7 @@ class SaveRestoreActions(object):
         self._logger = logger
 
     def save_config_file(self, config_file, action_map=None, error_map=None):
-        """
+        """Save configuration file.
 
         :param config_file:
         :param action_map:
@@ -31,7 +31,7 @@ class SaveRestoreActions(object):
         ).execute_command(config_file=config_file)
 
     def load_config_file(self, config_file, action_map=None, error_map=None):
-        """
+        """Load configuration file.
 
         :param config_file:
         :param action_map:
@@ -48,7 +48,7 @@ class SaveRestoreActions(object):
     def export_config_file(
         self, config_file, remote_url, user, password, action_map=None, error_map=None
     ):
-        """
+        """Export configuration file to the remote server.
 
         :param config_file:
         :param remote_url:
@@ -76,7 +76,7 @@ class SaveRestoreActions(object):
     def import_config_file(
         self, config_file, remote_url, user, password, action_map=None, error_map=None
     ):
-        """
+        """Import config file from the remote server.
 
         :param config_file:
         :param remote_url:
@@ -102,7 +102,7 @@ class SaveRestoreActions(object):
         ).execute_command(**command_kwargs)
 
     def delete_config_file(self, config_file, action_map=None, error_map=None):
-        """
+        """Delete local configuration file.
 
         :param config_file:
         :param action_map:

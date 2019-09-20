@@ -15,7 +15,8 @@ EXPORT_CONFIG_FILE_ANONYMOUS = CommandTemplate(
 )
 
 EXPORT_CONFIG_FILE = CommandTemplate(
-    "system config-files export local-file {config_file} remote-url {remote_url} username {user} password {password}",
+    "system config-files export local-file {config_file} remote-url {remote_url} "
+    "username {user} password {password}",
     action_map=OrderedDict(
         [(r"[Ee]rror:.*[Aa]access [Dd]enied", "Failed uploading file: Access denied")]
     ),
@@ -36,7 +37,8 @@ IMPORT_CONFIG_FILE_ANONYMOUS = CommandTemplate(
 )
 
 IMPORT_CONFIG_FILE = CommandTemplate(
-    "system config-files import local-file {config_file} remote-url {remote_url} username {user} password {password}",
+    "system config-files import local-file {config_file} remote-url {remote_url} "
+    "username {user} password {password}",
     error_map=ERROR_MAP,
     action_map=OrderedDict(
         [

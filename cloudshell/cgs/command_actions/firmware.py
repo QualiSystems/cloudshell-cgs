@@ -9,7 +9,7 @@ from cloudshell.cgs.command_templates import firmware
 
 class FirmwareActions(object):
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
 
         :param cli_service:
         :param logger:
@@ -18,7 +18,7 @@ class FirmwareActions(object):
         self._logger = logger
 
     def set_remote_firmware_file(self, remote_url, action_map=None, error_map=None):
-        """
+        """Set remote firmware file URL.
 
         :param remote_url:
         :param action_map:
@@ -33,7 +33,7 @@ class FirmwareActions(object):
         ).execute_command(remote_url=remote_url)
 
     def set_remote_firmware_user(self, user, action_map=None, error_map=None):
-        """
+        """Set username for the remote firmware file.
 
         :param user:
         :param action_map:
@@ -56,7 +56,7 @@ class FirmwareActions(object):
         ).execute_command(**command_kwargs)
 
     def set_remote_firmware_password(self, password, action_map=None, error_map=None):
-        """
+        """Set password for the remote firmware file.
 
         :param password:
         :param action_map:
@@ -79,7 +79,7 @@ class FirmwareActions(object):
         ).execute_command(**command_kwargs)
 
     def start_sw_upgrade(self, action_map=None, error_map=None):
-        """
+        """Start firmware upgrade.
 
         :param action_map:
         :param error_map:
@@ -93,7 +93,7 @@ class FirmwareActions(object):
         ).execute_command()
 
     def get_last_error_msg(self, action_map=None, error_map=None):
-        """
+        """Get last error message for the firmware file.
 
         :return:
         """
@@ -112,14 +112,13 @@ class FirmwareActions(object):
             return sw_details.group("error_msg")
 
     def get_sw_upgrade_file_status(self, file_name, action_map=None, error_map=None):
-        """
+        """Get uploaded firmware file status.
 
         :param file_name:
         :param action_map:
         :param error_map:
         :return:
         """
-
         output = CommandTemplateExecutor(
             cli_service=self._cli_service,
             command_template=firmware.SHOW_SW_UPGRADE_INFO,
@@ -137,14 +136,13 @@ class FirmwareActions(object):
         return sw_details.group("status") if sw_details else ""
 
     def get_sw_upgrade_file_boot_bank(self, file_name, action_map=None, error_map=None):
-        """
+        """Get Boot bank for the uploaded firmware.
 
         :param file_name:
         :param action_map:
         :param error_map:
         :return:
         """
-
         output = CommandTemplateExecutor(
             cli_service=self._cli_service,
             command_template=firmware.SHOW_SW_UPGRADE_INFO,
@@ -162,7 +160,7 @@ class FirmwareActions(object):
         return sw_details.group("bank")
 
     def set_remote_firmware_boot_bank(self, boot_bank, action_map=None, error_map=None):
-        """
+        """Set Boot bank for the uploaded firmware.
 
         :param boot_bank:
         :param action_map:
@@ -177,7 +175,7 @@ class FirmwareActions(object):
         ).execute_command(boot_bank=boot_bank)
 
     def system_reboot(self, action_map=None, error_map=None):
-        """
+        """Reboot device.
 
         :param action_map:
         :param error_map:

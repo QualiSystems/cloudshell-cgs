@@ -13,7 +13,7 @@ class CgsEnableSnmpFlow(EnableSnmpFlow):
     SNMP_WAITING_INTERVAL = 5
 
     def __init__(self, cli_handler, resource_config, api, logger):
-        """
+        """Init command.
 
         :param cli_handler:
         :param resource_config:
@@ -25,7 +25,7 @@ class CgsEnableSnmpFlow(EnableSnmpFlow):
         self._api = api
 
     def execute_flow(self, snmp_parameters):
-        """
+        """Execute enable SNMP flow.
 
         :param cloudshell.snmp.snmp_parameters.SNMPParameters snmp_parameters:
         :return: commands output
@@ -41,7 +41,7 @@ class CgsEnableSnmpFlow(EnableSnmpFlow):
             enable_snmp(cli_service=cli_service, snmp_parameters=snmp_parameters)
 
     def _enable_snmp_v2(self, cli_service, snmp_parameters):
-        """
+        """Execute enable SNMPv2 flow.
 
         :param cloudshell.cli.cli_service_impl.CliServiceImpl cli_service:
         :param cloudshell.snmp.snmp_parameters.SNMPParameters snmp_parameters:
@@ -77,7 +77,7 @@ class CgsEnableSnmpFlow(EnableSnmpFlow):
         return output
 
     def _enable_snmp_v3(self, cli_service, snmp_parameters):
-        """
+        """Execute enable SNMPv3 flow.
 
         :param cloudshell.cli.cli_service_impl.CliServiceImpl cli_service:
         :param cloudshell.snmp.snmp_parameters.SNMPParameters snmp_parameters:

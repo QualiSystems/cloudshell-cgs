@@ -11,7 +11,7 @@ from cloudshell.cgs.errors import FilterDoesNotExist
 class CgsRemoveVlanFlow(RemoveVlanFlow):
     @staticmethod
     def _get_port_name(full_port_name):
-        """
+        """Parse CGS port name from the CS full port name.
 
         :param full_port_name:
         :return:
@@ -21,7 +21,7 @@ class CgsRemoveVlanFlow(RemoveVlanFlow):
     def execute_flow(
         self, vlan_range, port_name, port_mode, action_map=None, error_map=None
     ):
-        """
+        """Execute Remove VLAN flow.
 
         :param vlan_range:
         :param port_name:

@@ -12,7 +12,8 @@ class VlanActions(FiltersActions):
     ACCESS_VLAN_PACKET_PROCESSING = "vlan-outer"
 
     def __init__(self, cli_service, logger):
-        """
+        """Init command.
+
         :param cli_service: default mode cli_service
         :type cli_service: CliService
         :param logger:
@@ -23,7 +24,7 @@ class VlanActions(FiltersActions):
         self._logger = logger
 
     def add_access_vlan_filter(self, vlan, port, action_map=None, error_map=None):
-        """
+        """Add access VLAN filter.
 
         :param vlan:
         :param port:
@@ -41,7 +42,7 @@ class VlanActions(FiltersActions):
         )
 
     def add_trunk_vlan_filter(self, vlan_range, port, action_map=None, error_map=None):
-        """
+        """Add trunk VLAN filter.
 
         :param vlan_range:
         :param port:
@@ -61,7 +62,7 @@ class VlanActions(FiltersActions):
         )
 
     def get_access_vlan_filters_id(self, vlan, port, action_map=None, error_map=None):
-        """
+        """Get access VLAN filters IDs.
 
         :param vlan:
         :param port:
@@ -81,7 +82,7 @@ class VlanActions(FiltersActions):
     def get_trunk_vlan_filters_id(
         self, vlan_range, port, action_map=None, error_map=None
     ):
-        """
+        """Get trunk VLAN filters IDs.
 
         :param vlan_range:
         :param port:

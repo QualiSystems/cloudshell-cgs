@@ -16,7 +16,7 @@ class CgsCliHandler(CliHandlerImpl):
 
     @property
     def enable_mode(self):
-        """
+        """Enable mode.
 
         :rtype: EnableCommandMode
         """
@@ -24,7 +24,7 @@ class CgsCliHandler(CliHandlerImpl):
 
     @property
     def config_mode(self):
-        """
+        """Config mode.
 
         :rtype: ConfigCommandMode
         """
@@ -32,7 +32,7 @@ class CgsCliHandler(CliHandlerImpl):
 
     @property
     def snmp_config_mode(self):
-        """
+        """SNMP Config mode.
 
         :rtype: SNMPConfigCommandMode
         """
@@ -40,14 +40,14 @@ class CgsCliHandler(CliHandlerImpl):
 
     @property
     def sw_upgrade_config_mode(self):
-        """
+        """SW Upgrade Config mode.
 
         :rtype: SNMPConfigCommandMode
         """
         return self.modes[SwUpgradeConfigCommandMode]
 
     def on_session_start(self, session, logger):
-        """Perform some default commands when session just opened (like 'no logging console')
+        """Perform some default commands when session just opened.
 
         :param session:
         :param logger:
