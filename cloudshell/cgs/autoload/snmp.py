@@ -2,16 +2,29 @@ import os
 import re
 
 from cloudshell.devices.autoload.autoload_builder import AutoloadDetailsBuilder
-from cloudshell.devices.standards.networking.autoload_structure import (
-    GenericChassis,
-    GenericPort,
-    GenericResource,
-)
 
 from cloudshell.cgs.autoload.snmp_if_table import SnmpIfTable
 
 
-class CgsSNMPAutoload(object):
+class AbstractCgsSNMPAutoload(object):
+    @property
+    def root_model_class(self):
+        raise NotImplementedError(
+            "Class {} must implement property 'root_model_class'".format(type(self))
+        )
+
+    @property
+    def chassis_model_class(self):
+        raise NotImplementedError(
+            "Class {} must implement property 'chassis_model_class'".format(type(self))
+        )
+
+    @property
+    def port_model_class(self):
+        raise NotImplementedError(
+            "Class {} must implement property 'port_model_class'".format(type(self))
+        )
+
     def __init__(self, snmp_handler, shell_name, shell_type, resource_name, logger):
         """Init command.
 
@@ -27,14 +40,14 @@ class CgsSNMPAutoload(object):
         self.resource_name = resource_name
         self.logger = logger
         self.elements = {}
-        self.resource = GenericResource(
+        self.resource = self.root_model_class(
             shell_name=shell_name,
             shell_type=shell_type,
             name=resource_name,
             unique_id=resource_name,
         )
 
-        self.chassis = GenericChassis(
+        self.chassis = self.chassis_model_class(
             shell_name=self.shell_name,
             name="Chassis",
             unique_id="{}.{}".format(self.resource_name, "chassis"),
@@ -45,7 +58,16 @@ class CgsSNMPAutoload(object):
     def _load_mibs(self):
         """Load CGS specific MIBs inside SNMP handler."""
         path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "mibs"))
+
         self.snmp_handler.update_mib_sources(path)
+
+    def _build_resources(self):
+        """Discover and create all needed resources.
+
+        :return:
+        """
+        self._get_device_details()
+        self._build_ports()
 
     def discover(self, supported_os):
         """General entry point for autoload, read device structure and attributes.
@@ -57,9 +79,9 @@ class CgsSNMPAutoload(object):
         self.logger.info("*" * 70)
         self.logger.info("Start SNMP discovery process .....")
         self._load_mibs()
-        self._get_device_details()
         self._load_snmp_tables()
-        self._build_ports()
+
+        self._build_resources()
 
         autoload_details = AutoloadDetailsBuilder(self.resource).autoload_details()
         self._log_autoload_details(autoload_details)
@@ -126,7 +148,7 @@ class CgsSNMPAutoload(object):
         self.resource.vendor = vendor
 
     def _load_snmp_tables(self):
-        """Load all Cisco required snmp tables.
+        """Load all required SNMP tables.
 
         :return:
         """
@@ -142,7 +164,7 @@ class CgsSNMPAutoload(object):
         self.logger.info("Loading Ports:")
 
         for if_port in self.if_table.if_ports:
-            port = GenericPort(
+            port = self.port_model_class(
                 shell_name=self.shell_name,
                 name=if_port.if_name.replace("/", "-"),
                 unique_id="{0}.{1}.{2}".format(
